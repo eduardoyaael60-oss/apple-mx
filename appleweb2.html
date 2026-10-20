@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apple · Recreación visual y Compra</title>
+  <style>
+
+    /* Reset and Base Styles */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      color: #1d1d1f;
+      background: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Header & Navigation */
+    header {
+      height: 44px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(250, 250, 250, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    nav {
+      height: 44px;
+      max-width: 1024px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      padding: 0 22px;
+    }
+    .brand svg {
+      width: 17px;
+      height: 21px;
+      fill: currentColor;
+      display: block;
+    }
+    .links {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex: 1;
+      gap: 20px;
+    }
+    .links a {
+      font-size: 12px;
+      white-space: nowrap;
+      color: rgba(0,0,0,0.8);
+      transition: color 0.2s ease;
+    }
+    .links a:hover {
+      color: #0071e3;
+    }
+    .menu {
+      display: none;
+      border: 0;
+      background: none;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* Hero / Tile Styles */
+    .tile {
+      height: 692px;
+      position: relative;
+      overflow: hidden;
+      background: #f5f5f7;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .dark {
+      background: #000;
+      color: #f5f5f7;
+    }
+    .product {
+      position: absolute;
+      inset: 0;
+      display: block;
+      pointer-events: none;
+    }
+    .product img {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 100%;
+      width: auto;
+      max-width: none;
+      object-fit: cover;
+    }
+    .copy {
+      position: relative;
+      z-index: 2;
+      padding: 46px 20px 0;
+    }
+    h2 {
+      font-size: 56px;
+      font-weight: 600;
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin: 0;
+    }
+    p {
+      font-size: 27px;
+      line-height: 1.15;
+      letter-spacing: -.6px;
+      margin: 12px 0 21px;
+    }
+    .actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+    }
+    .btn {
+      display: inline-block;
+      border-radius: 30px;
+      background: #0071e3;
+      color: #fff;
+      padding: 11px 21px;
+      border: 1px solid #0071e3;
+      font-size: 17px;
+      line-height: 1.17647;
+      font-weight: 400;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn:hover {
+      background: #0077ed;
+      border-color: #0077ed;
+    }
+    .secondary {
+      background: transparent;
+      color: #0071e3;
+      border-color: #0071e3;
+    }
+    .secondary:hover {
+      background: #0071e3;
+      color: #fff;
+    }
+    .dark .secondary {
+      color: #2997ff;
+      border-color: #2997ff;
+    }
+    .dark .secondary:hover {
+      background: #2997ff;
+      color: #fff;
+    }
+    .logo {
+      display: inline-block;
+      height: 62px;
+    }
+    .logo img {
+      max-height: 100%;
+      max-width: 85%;
+      width: auto;
+    }
+
+    /* Grid Layout */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 0 12px;
+    }
+    .grid .tile {
+      height: 580px;
+      margin: 0;
+    }
+    .grid .copy {
+      padding-top: 42px;
+    }
+    .grid h2 {
+      font-size: 40px;
+      letter-spacing: -1px;
+    }
+    .grid p {
+      font-size: 21px;
+      max-width: 340px;
+      margin: 10px auto 19px;
+    }
+    .grid .btn {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+    .grid .logo {
+      height: 40px;
+    }
+
+    /* Order Section Form Styles */
+    .order-section {
+      background: #f5f5f7;
+      padding: 64px 20px;
+      margin-top: 12px;
+      scroll-margin-top: 50px;
+    }
+
+    .order-container {
+      max-width: 760px;
+      margin: auto;
+      background: #fff;
+      padding: 38px;
+      border-radius: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .order-container > h2 {
+      font-size: 40px;
+      letter-spacing: -1.5px;
+      margin-bottom: 8px;
+    }
+
+    .order-intro {
+      font-size: 18px;
+      color: #6e6e73;
+      line-height: 1.5;
+      margin-bottom: 32px;
+    }
+
+    .order-container h3 {
+      font-size: 21px;
+      margin: 30px 0 16px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-grid label {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1d1d1f;
+    }
+
+    .form-grid .full {
+      grid-column: 1 / -1;
+    }
+
+    .form-grid input,
+    .form-grid select,
+    .form-grid textarea {
+      width: 100%;
+      min-width: 0;
+      padding: 13px 14px;
+      border: 1px solid #d2d2d7;
+      border-radius: 12px;
+      background: #fff;
+      color: #1d1d1f;
+      font: inherit;
+      font-weight: 400;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-grid input:focus,
+    .form-grid select:focus,
+    .form-grid textarea:focus {
+      outline: none;
+      border-color: #0071e3;
+      box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.15);
+    }
+
+    .payment-note,
+    .demo-note {
+      font-size: 14px;
+      line-height: 1.5;
+      letter-spacing: 0;
+      color: #6e6e73;
+      margin: 16px 0;
+    }
+
+    .consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 24px 0;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #424245;
+    }
+
+    .consent input {
+      margin-top: 4px;
+      width: auto;
+    }
+
+    .order-submit {
+      display: block;
+      width: 100%;
+      padding: 15px 20px;
+      border: 0;
+      border-radius: 28px;
+      background: #0071e3;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .order-submit:hover {
+      background: #0077ed;
+    }
+
+    .order-result {
+      margin-top: 22px;
+      padding: 24px;
+      border-radius: 16px;
+      background: #fbfbfd;
+      border: 1px solid #e5e5e7;
+      overflow-wrap: anywhere;
+      display: none;
+    }
+
+    .order-result h3 {
+      margin-top: 0;
+      color: #1d1d1f;
+    }
+
+    .order-result p {
+      font-size: 15px;
+      line-height: 1.6;
+      letter-spacing: 0;
+      color: #424245;
+      margin: 8px 0;
+    }
+
+    .order-summary-box {
+      background: #fff;
+      border: 1px solid #d2d2d7;
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+
+    /* Footer */
+    footer {
+      background: #f5f5f7;
+      padding: 25px 24px;
+      margin-top: 12px;
+      color: #6e6e73;
+    }
+    footer div {
+      max-width: 980px;
+      margin: auto;
+    }
+    footer p {
+      font-size: 12px;
+      line-height: 1.6;
+      letter-spacing: 0;
+      margin: 8px 0;
+    }
+    footer a {
+      text-decoration: underline;
+    }
+    .footlinks {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      border-top: 1px solid #d2d2d7;
+      padding-top: 18px;
+      margin-top: 16px;
+      font-size: 12px;
+    }
+
+    :focus-visible {
+      outline: 3px solid #2997ff;
+      outline-offset: 2px;
+    }
+
+    /* Responsive Breakpoints */
+    @media(min-width: 1500px) {
+      .tile {
+        height: 740px;
+      }
+    }
+    @media(max-width: 1068px) {
+      nav {
+        gap: 20px;
+      }
+      .links {
+        gap: 12px;
+      }
+      .tile {
+        height: 650px;
+      }
+      .grid .tile {
+        height: 560px;
+      }
+      h2 {
+        font-size: 48px;
+      }
+      p {
+        font-size: 24px;
+      }
+      .grid h2 {
+        font-size: 34px;
+      }
+    }
+    @media (max-width: 734px) {
+      header, nav {
+        height: 48px;
+      }
+      nav {
+        justify-content: space-between;
+      }
+      .menu {
+        display: block;
+      }
+      .links {
+        display: none;
+        position: absolute;
+        top: 48px;
+        left: 0;
+        right: 0;
+        background: #fafafa;
+        padding: 25px 35px;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 18px;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+      }
+      .links.open {
+        display: flex;
+      }
+      .links a {
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .tile {
+        height: 548px;
+      }
+      .copy {
+        padding-top: 36px;
+      }
+      h2 {
+        font-size: 34px;
+        letter-spacing: -1px;
+      }
+      p {
+        font-size: 19px;
+        max-width: 300px;
+        margin: 10px auto 19px;
+      }
+      .btn {
+        font-size: 14px;
+        padding: 10px 18px;
+      }
+      .logo {
+        height: 48px;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+        padding: 0;
+      }
+      .grid .tile {
+        height: 548px;
+      }
+      .grid h2 {
+        font-size: 32px;
+      }
+      .grid p {
+        font-size: 19px;
+      }
+      .grid .copy {
+        padding-top: 35px;
+      }
+      .grid .logo {
+        height: 38px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .order-section {
+        padding: 32px 14px;
+      }
+
+      .order-container {
+        padding: 24px 18px;
+        border-radius: 18px;
+      }
+
+      .order-container > h2 {
+        font-size: 32px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid .full {
+        grid-column: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header>
+    <nav aria-label="Navegación principal">
+      <a class="brand" href="#contenido" aria-label="Inicio">
+        <svg viewBox="0 0 24 28" aria-hidden="true">
+          <path d="M17.8 0c.2 2-1 4.2-2.3 5.5-1.3 1.3-3.2 2.1-5 1.9-.2-1.9.8-4 2.1-5.2C14 1 16 .1 17.8 0ZM22.8 20.5c-.6 1.5-.9 2.2-1.7 3.5-1.1 1.6-2.6 3.7-4.5 3.7-1.7 0-2.2-1.1-4.5-1.1s-2.9 1.1-4.6 1.1c-1.9 0-3.4-1.9-4.5-3.6C0 19.4-.5 13.1 1.4 10.2c1.4-2.1 3.6-3.3 5.7-3.3 1.8 0 3 1.1 4.5 1.1 1.4 0 2.7-1.1 4.7-1.1 1.8 0 3.8 1 5.1 2.7-4.5 2.5-3.8 8.9 1.4 10.9Z"/>
+        </svg>
+      </a>
+      <div class="links" id="navlinks">
+        <a href="https://www.apple.com/mx/shop/">Tienda</a>
+        <a href="https://www.apple.com/mx/mac/">Mac</a>
+        <a href="https://www.apple.com/mx/ipad/">iPad</a>
+        <a href="https://www.apple.com/mx/iphone/">iPhone</a>
+        <a href="https://www.apple.com/mx/watch/">Watch</a>
+        <a href="https://www.apple.com/mx/airpods/">AirPods</a>
+        <a href="https://www.apple.com/mx/home-app/">Hogar</a>
+        <a href="https://www.apple.com/mx/services/">Entretenimiento</a>
+        <a href="https://www.apple.com/mx/shop/accessories/all">Accesorios</a>
+        <a href="https://support.apple.com/es-mx/">Soporte</a>
+      </div>
+      <button class="menu" id="menu" aria-controls="navlinks" aria-expanded="false" aria-label="Abrir menú">☰</button>
+    </nav>
+  </header>
+
+  <!-- Content Section -->
+  <main id="contenido">
+    <!-- iPhone Duo -->
+    <section class="tile" id="iphone-duo">
+      <picture class="product">
+        <source media="(max-width:734px)" srcset="https://www.apple.com/mx/homepage/built/heroes/26_iphone-duo_09/images/hero_iphone_duo_announce__fh4u8yzndpe2_small.jpg, https://www.apple.com/mx/homepage/built/heroes/26_iphone-duo_09/images/hero_iphone_duo_announce__fh4u8yzndpe2_small_2x.jpg 2x">
+        <source media="(max-width:1068px) and (min-height:734px)" srcset="https://www.apple.com/mx/homepage/built/heroes/26_iphone-duo_09/images/hero_iphone_duo_announce__fh4u8yzndpe2_mediumtall.jpg, https://www.apple.com/mx/homepage/built/heroes/26_iphone-duo_09/images/hero_iphone_duo_announce__fh4u8yzndpe2_mediumtall_2x.jpg 2x">
+        <source media="(max-width:1068px) and (max-height:733px)" srcset="https://www.apple.com/mx/homepage/built/heroes/26_iphone-duo_09/images/hero_iphone_duo_announce__fh4u8yzndpe2_medium.jpg, https://www.apple.com/mx/homepage/built/heroes/26_iphone-duo_09/images/hero_iphone_duo_announce__fh4u8yzndpe2_medium_2x.jpg 2x">
+        <source media="(min-width:0px) and (min-height:776px)" srcset="https://www.apple.com/mx/homepage/built/heroes/26_iphone-duo_09/images/hero_iphone_duo_announce__fh4u8yzndpe2_largetall.jpg, https://www.apple.com/mx/homepage/built/heroes/26_iphone-duo_09/images/hero_iphone_duo_announce__fh4u8yzndpe2_largetall_2x.jpg 2x">
+        <source media="(min-width:0px) and (max-height:775px)" srcset="https://www.apple.com/mx/homepage/built/heroes/26_iphone-duo_09/images/hero_iphone_duo_announce__fh4u8yzndpe2_large.jpg, https://www.apple.com/mx/homepage/built/heroes/26_iphone-duo_09/images/hero_iphone_duo_announce__fh4u8yzndpe2_large_2x.jpg 2x">
+        <img src="https://www.apple.com/mx/homepage/built/heroes/26_iphone-duo_09/images/hero_iphone_duo_announce__fh4u8yzndpe2_large.jpg" alt="iPhone Duo" fetchpriority="high">
+      </picture>
+      <div class="copy">
+        <h2>iPhone Duo</h2>
+        <p>Descubre una nueva forma de usar tu iPhone.</p>
+        <div class="actions">
+          <button class="btn" type="button" onclick="comprar('iPhone Duo')">Comprar</button>
+          <a class="btn secondary" href="https://www.apple.com/mx/iphone-duo/">Más información</a>
+          <a class="btn secondary" href="https://www.apple.com/mx/shop/goto/buy_iphone/iphone_duo" target="_blank" rel="noopener">Ver en Apple</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- iPhone 18 Pro -->
+    <section class="tile dark" id="iphone-18-pro">
+      <picture class="product">
+        <source media="(max-width:734px)" srcset="https://www.apple.com/v/homepage/images/iphone-18-pro/a/hero_iphone_18_pro_preorder__dd68unjbzswi_small.jpg, https://www.apple.com/v/homepage/images/iphone-18-pro/a/hero_iphone_18_pro_preorder__dd68unjbzswi_small_2x.jpg 2x">
+        <source media="(max-width:1068px) and (min-height:734px)" srcset="https://www.apple.com/v/homepage/images/iphone-18-pro/a/hero_iphone_18_pro_preorder__dd68unjbzswi_mediumtall.jpg, https://www.apple.com/v/homepage/images/iphone-18-pro/a/hero_iphone_18_pro_preorder__dd68unjbzswi_mediumtall_2x.jpg 2x">
+        <source media="(max-width:1068px) and (max-height:733px)" srcset="https://www.apple.com/v/homepage/images/iphone-18-pro/a/hero_iphone_18_pro_preorder__dd68unjbzswi_medium.jpg, https://www.apple.com/v/homepage/images/iphone-18-pro/a/hero_iphone_18_pro_preorder__dd68unjbzswi_medium_2x.jpg 2x">
+        <source media="(min-width:0px) and (min-height:776px)" srcset="https://www.apple.com/v/homepage/images/iphone-18-pro/a/hero_iphone_18_pro_preorder__dd68unjbzswi_largetall.jpg, https://www.apple.com/v/homepage/images/iphone-18-pro/a/hero_iphone_18_pro_preorder__dd68unjbzswi_largetall_2x.jpg 2x">
+        <source media="(min-width:0px) and (max-height:775px)" srcset="https://www.apple.com/v/homepage/images/iphone-18-pro/a/hero_iphone_18_pro_preorder__dd68unjbzswi_large.jpg, https://www.apple.com/v/homepage/images/iphone-18-pro/a/hero_iphone_18_pro_preorder__dd68unjbzswi_large_2x.jpg 2x">
+        <img src="https://www.apple.com/v/homepage/images/iphone-18-pro/a/hero_iphone_18_pro_preorder__dd68unjbzswi_large.jpg" alt="iPhone 18 Pro" loading="lazy">
+      </picture>
+      <div class="copy">
+        <h2>iPhone 18 Pro</h2>
+        <p>Explora la experiencia Pro.</p>
+        <div class="actions">
+          <button class="btn" type="button" onclick="comprar('iPhone 18 Pro')">Comprar</button>
+          <a class="btn secondary" href="https://www.apple.com/mx/iphone-18-pro/">Más información</a>
+          <a class="btn secondary" href="https://www.apple.com/mx/shop/goto/buy_iphone/iphone_18_pro" target="_blank" rel="noopener">Ver en Apple</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Apple Watch Series 12 -->
+    <section class="tile dark" id="apple-watch-series-12">
+      <picture class="product">
+        <source media="(max-width:734px)" srcset="https://www.apple.com/mx/homepage/built/heroes/26_apple-watch-series-12_09/images/hero_apple_watch_series_12__n9rln7bzvwya_small.jpg, https://www.apple.com/mx/homepage/built/heroes/26_apple-watch-series-12_09/images/hero_apple_watch_series_12__n9rln7bzvwya_small_2x.jpg 2x">
+        <source media="(max-width:1068px) and (min-height:734px)" srcset="https://www.apple.com/mx/homepage/built/heroes/26_apple-watch-series-12_09/images/hero_apple_watch_series_12__n9rln7bzvwya_mediumtall.jpg, https://www.apple.com/mx/homepage/built/heroes/26_apple-watch-series-12_09/images/hero_apple_watch_series_12__n9rln7bzvwya_mediumtall_2x.jpg 2x">
+        <source media="(max-width:1068px) and (max-height:733px)" srcset="https://www.apple.com/mx/homepage/built/heroes/26_apple-watch-series-12_09/images/hero_apple_watch_series_12__n9rln7bzvwya_medium.jpg, https://www.apple.com/mx/homepage/built/heroes/26_apple-watch-series-12_09/images/hero_apple_watch_series_12__n9rln7bzvwya_medium_2x.jpg 2x">
+        <source media="(min-width:0px) and (min-height:776px)" srcset="https://www.apple.com/mx/homepage/built/heroes/26_apple-watch-series-12_09/images/hero_apple_watch_series_12__n9rln7bzvwya_largetall.jpg, https://www.apple.com/mx/homepage/built/heroes/26_apple-watch-series-12_09/images/hero_apple_watch_series_12__n9rln7bzvwya_largetall_2x.jpg 2x">
+        <source media="(min-width:0px) and (max-height:775px)" srcset="https://www.apple.com/mx/homepage/built/heroes/26_apple-watch-series-12_09/images/hero_apple_watch_series_12__n9rln7bzvwya_large.jpg, https://www.apple.com/mx/homepage/built/heroes/26_apple-watch-series-12_09/images/hero_apple_watch_series_12__n9rln7bzvwya_large_2x.jpg 2x">
+        <img src="https://www.apple.com/mx/homepage/built/heroes/26_apple-watch-series-12_09/images/hero_apple_watch_series_12__n9rln7bzvwya_large.jpg" alt="Apple Watch Series 12" loading="lazy">
+      </picture>
+      <div class="copy">
+        <h2>
+          <picture class="logo">
+            <source media="(max-width:734px)" srcset="https://www.apple.com/v/homepage/images/logos/apple-watch-series-12/a/hero_logo_apple_watch_series_12__eze8r897c5me_small.png, https://www.apple.com/v/homepage/images/logos/apple-watch-series-12/a/hero_logo_apple_watch_series_12__eze8r897c5me_small_2x.png 2x">
+            <source media="(max-width:1068px)" srcset="https://www.apple.com/v/homepage/images/logos/apple-watch-series-12/a/hero_logo_apple_watch_series_12__eze8r897c5me_medium.png, https://www.apple.com/v/homepage/images/logos/apple-watch-series-12/a/hero_logo_apple_watch_series_12__eze8r897c5me_medium_2x.png 2x">
+            <source media="(min-width:0px)" srcset="https://www.apple.com/v/homepage/images/logos/apple-watch-series-12/a/hero_logo_apple_watch_series_12__eze8r897c5me_large.png, https://www.apple.com/v/homepage/images/logos/apple-watch-series-12/a/hero_logo_apple_watch_series_12__eze8r897c5me_large_2x.png 2x">
+            <img src="https://www.apple.com/v/homepage/images/logos/apple-watch-series-12/a/hero_logo_apple_watch_series_12__eze8r897c5me_large.png" alt="Apple Watch Series 12" loading="lazy">
+          </picture>
+        </h2>
+        <p>Conoce la nueva generación de Apple Watch.</p>
+        <div class="actions">
+          <button class="btn" type="button" onclick="comprar('Apple Watch Series 12')">Comprar</button>
+          <a class="btn secondary" href="https://www.apple.com/mx/apple-watch-series-12/">Más información</a>
+          <a class="btn secondary" href="https://www.apple.com/mx/shop/goto/buy_watch/apple_watch_series_12" target="_blank" rel="noopener">Ver en Apple</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grid Layout Promos -->
+    <div class="grid">
+      <!-- Apple TV 4K -->
+      <section class="tile" id="apple-tv-4k">
+        <picture class="product">
+          <source media="(max-width:734px)" srcset="https://www.apple.com/v/homepage/images/apple-tv-4k/a/promo_apple_tv_4k_preorder__d4z5g4tm3qoi_small.jpg, https://www.apple.com/v/homepage/images/apple-tv-4k/a/promo_apple_tv_4k_preorder__d4z5g4tm3qoi_small_2x.jpg 2x">
+          <source media="(max-width:1068px)" srcset="https://www.apple.com/v/homepage/images/apple-tv-4k/a/promo_apple_tv_4k_preorder__d4z5g4tm3qoi_medium.jpg, https://www.apple.com/v/homepage/images/apple-tv-4k/a/promo_apple_tv_4k_preorder__d4z5g4tm3qoi_medium_2x.jpg 2x">
+          <source media="(min-width:0px)" srcset="https://www.apple.com/v/homepage/images/apple-tv-4k/a/promo_apple_tv_4k_preorder__d4z5g4tm3qoi_large.jpg, https://www.apple.com/v/homepage/images/apple-tv-4k/a/promo_apple_tv_4k_preorder__d4z5g4tm3qoi_large_2x.jpg 2x">
+          <img src="https://www.apple.com/v/homepage/images/apple-tv-4k/a/promo_apple_tv_4k_preorder__d4z5g4tm3qoi_large.jpg" alt="Apple TV 4K" loading="lazy">
+        </picture>
+        <div class="copy">
+          <h2>
+            <picture class="logo">
+              <source media="(max-width:734px)" srcset="https://www.apple.com/v/homepage/images/logos/apple-tv-4k/a/promo_logo_apple_tv_4k__dmr11vmopro2_small.png, https://www.apple.com/v/homepage/images/logos/apple-tv-4k/a/promo_logo_apple_tv_4k__dmr11vmopro2_small_2x.png 2x">
+              <source media="(max-width:1068px)" srcset="https://www.apple.com/v/homepage/images/logos/apple-tv-4k/a/promo_logo_apple_tv_4k__dmr11vmopro2_medium.png, https://www.apple.com/v/homepage/images/logos/apple-tv-4k/a/promo_logo_apple_tv_4k__dmr11vmopro2_medium_2x.png 2x">
+              <source media="(min-width:0px)" srcset="https://www.apple.com/v/homepage/images/logos/apple-tv-4k/a/promo_logo_apple_tv_4k__dmr11vmopro2_large.png, https://www.apple.com/v/homepage/images/logos/apple-tv-4k/a/promo_logo_apple_tv_4k__dmr11vmopro2_large_2x.png 2x">
+              <img src="https://www.apple.com/v/homepage/images/logos/apple-tv-4k/a/promo_logo_apple_tv_4k__dmr11vmopro2_large.png" alt="Apple TV 4K" loading="lazy">
+            </picture>
+          </h2>
+          <p>Tu entretenimiento, en una sola pantalla.</p>
+          <div class="actions">
+            <button class="btn" type="button" onclick="comprar('Apple TV 4K')">Comprar</button>
+            <a class="btn secondary" href="https://www.apple.com/mx/apple-tv-4k/">Más información</a>
+            <a class="btn secondary" href="https://www.apple.com/mx/shop/goto/buy_tv/apple_tv_4k" target="_blank" rel="noopener">Ver en Apple</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- HomePod mini 2 -->
+      <section class="tile" id="homepod-mini-2">
+        <picture class="product">
+          <source media="(max-width:734px)" srcset="https://www.apple.com/v/homepage/images/homepod-mini-2/a/promo_homepod_mini_2_preorder__emihici4p1si_small.jpg, https://www.apple.com/v/homepage/images/homepod-mini-2/a/promo_homepod_mini_2_preorder__emihici4p1si_small_2x.jpg 2x">
+          <source media="(max-width:1068px)" srcset="https://www.apple.com/v/homepage/images/homepod-mini-2/a/promo_homepod_mini_2_preorder__emihici4p1si_medium.jpg, https://www.apple.com/v/homepage/images/homepod-mini-2/a/promo_homepod_mini_2_preorder__emihici4p1si_medium_2x.jpg 2x">
+          <source media="(min-width:0px)" srcset="https://www.apple.com/v/homepage/images/homepod-mini-2/a/promo_homepod_mini_2_preorder__emihici4p1si_large.jpg, https://www.apple.com/v/homepage/images/homepod-mini-2/a/promo_homepod_mini_2_preorder__emihici4p1si_large_2x.jpg 2x">
+          <img src="https://www.apple.com/v/homepage/images/homepod-mini-2/a/promo_homepod_mini_2_preorder__emihici4p1si_large.jpg" alt="HomePod mini 2" loading="lazy">
+        </picture>
+        <div class="copy">
+          <h2>HomePod mini 2</h2>
+          <p>Encuentra el color que va contigo.</p>
+          <div class="actions">
+            <button class="btn" type="button" onclick="comprar('HomePod mini 2')">Comprar</button>
+            <a class="btn secondary" href="https://www.apple.com/mx/homepod-mini/">Más información</a>
+            <a class="btn secondary" href="https://www.apple.com/mx/shop/goto/buy_homepod/homepod_mini/" target="_blank" rel="noopener">Ver en Apple</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Apple Watch Ultra 4 -->
+      <section class="tile dark" id="apple-watch-ultra-4">
+        <picture class="product">
+          <source media="(max-width:734px)" srcset="https://www.apple.com/mx/homepage/built/promos/26_apple-watch-ultra-4_09/images/promo_apple_watch_ultra_4__e4r3qertak2u_small.jpg, https://www.apple.com/mx/homepage/built/promos/26_apple-watch-ultra-4_09/images/promo_apple_watch_ultra_4__e4r3qertak2u_small_2x.jpg 2x">
+          <source media="(max-width:1068px)" srcset="https://www.apple.com/mx/homepage/built/promos/26_apple-watch-ultra-4_09/images/promo_apple_watch_ultra_4__e4r3qertak2u_medium.jpg, https://www.apple.com/mx/homepage/built/promos/26_apple-watch-ultra-4_09/images/promo_apple_watch_ultra_4__e4r3qertak2u_medium_2x.jpg 2x">
+          <source media="(min-width:0px)" srcset="https://www.apple.com/mx/homepage/built/promos/26_apple-watch-ultra-4_09/images/promo_apple_watch_ultra_4__e4r3qertak2u_large.jpg, https://www.apple.com/mx/homepage/built/promos/26_apple-watch-ultra-4_09/images/promo_apple_watch_ultra_4__e4r3qertak2u_large_2x.jpg 2x">
+          <img src="https://www.apple.com/mx/homepage/built/promos/26_apple-watch-ultra-4_09/images/promo_apple_watch_ultra_4__e4r3qertak2u_large.jpg" alt="Apple Watch Ultra 4" loading="lazy">
+        </picture>
+        <div class="copy">
+          <h2>
+            <picture class="logo">
+              <source media="(max-width:734px)" srcset="https://www.apple.com/v/homepage/images/logos/apple-watch-ultra-4/a/promo_logo_apple_watch_ultra_4__bc6ish8cjaeq_small.png, https://www.apple.com/v/homepage/images/logos/apple-watch-ultra-4/a/promo_logo_apple_watch_ultra_4__bc6ish8cjaeq_small_2x.png 2x">
+              <source media="(max-width:1068px)" srcset="https://www.apple.com/v/homepage/images/logos/apple-watch-ultra-4/a/promo_logo_apple_watch_ultra_4__bc6ish8cjaeq_medium.png, https://www.apple.com/v/homepage/images/logos/apple-watch-ultra-4/a/promo_logo_apple_watch_ultra_4__bc6ish8cjaeq_medium_2x.png 2x">
+              <source media="(min-width:0px)" srcset="https://www.apple.com/v/homepage/images/logos/apple-watch-ultra-4/a/promo_logo_apple_watch_ultra_4__bc6ish8cjaeq_large.png, https://www.apple.com/v/homepage/images/logos/apple-watch-ultra-4/a/promo_logo_apple_watch_ultra_4__bc6ish8cjaeq_large_2x.png 2x">
+              <img src="https://www.apple.com/v/homepage/images/logos/apple-watch-ultra-4/a/promo_logo_apple_watch_ultra_4__bc6ish8cjaeq_large.png" alt="Apple Watch Ultra 4" loading="lazy">
+            </picture>
+          </h2>
+          <p>Descubre todo lo que puedes hacer.</p>
+          <div class="actions">
+            <button class="btn" type="button" onclick="comprar('Apple Watch Ultra 4')">Comprar</button>
+            <a class="btn secondary" href="https://www.apple.com/mx/apple-watch-ultra-4/">Más información</a>
+            <a class="btn secondary" href="https://www.apple.com/mx/shop/goto/buy_watch/apple_watch_ultra_4" target="_blank" rel="noopener">Ver en Apple</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- iPad Air -->
+      <section class="tile" id="ipad-air-m4">
+        <picture class="product">
+          <source media="(max-width:734px)" srcset="https://www.apple.com/mx/homepage/built/promos/26_ipad-air-m4_06/images/promo_ipad_air_m4__bgcv7t286k8y_small.jpg, https://www.apple.com/mx/homepage/built/promos/26_ipad-air-m4_06/images/promo_ipad_air_m4__bgcv7t286k8y_small_2x.jpg 2x">
+          <source media="(max-width:1068px)" srcset="https://www.apple.com/mx/homepage/built/promos/26_ipad-air-m4_06/images/promo_ipad_air_m4__bgcv7t286k8y_medium.jpg, https://www.apple.com/mx/homepage/built/promos/26_ipad-air-m4_06/images/promo_ipad_air_m4__bgcv7t286k8y_medium_2x.jpg 2x">
+          <source media="(min-width:0px)" srcset="https://www.apple.com/v/homepage/images/ipad-air-m4/a/promo_ipad_air_m4__bgcv7t286k8y_large.jpg, https://www.apple.com/v/homepage/images/ipad-air-m4/a/promo_ipad_air_m4__bgcv7t286k8y_large_2x.jpg 2x">
+          <img src="https://www.apple.com/v/homepage/images/ipad-air-m4/a/promo_ipad_air_m4__bgcv7t286k8y_large.jpg" alt="iPad Air" loading="lazy">
+        </picture>
+        <div class="copy">
+          <h2>
+            <picture class="logo">
+              <source media="(max-width:734px)" srcset="https://www.apple.com/v/homepage/images/logos/ipad-air-m4/a/promo_logo_ipad_air__dqdj4ni03quu_small.png, https://www.apple.com/v/homepage/images/logos/ipad-air-m4/a/promo_logo_ipad_air__dqdj4ni03quu_small_2x.png 2x">
+              <source media="(max-width:1068px)" srcset="https://www.apple.com/v/homepage/images/logos/ipad-air-m4/a/promo_logo_ipad_air__dqdj4ni03quu_medium.png, https://www.apple.com/v/homepage/images/logos/ipad-air-m4/a/promo_logo_ipad_air__dqdj4ni03quu_medium_2x.png 2x">
+              <source media="(min-width:0px)" srcset="https://www.apple.com/v/homepage/images/logos/ipad-air-m4/a/promo_logo_ipad_air__dqdj4ni03quu_large.png, https://www.apple.com/v/homepage/images/logos/ipad-air-m4/a/promo_logo_ipad_air__dqdj4ni03quu_large_2x.png 2x">
+              <img src="https://www.apple.com/v/homepage/images/logos/ipad-air-m4/a/promo_logo_ipad_air__dqdj4ni03quu_large.png" alt="iPad Air" loading="lazy">
+            </picture>
+          </h2>
+          <p>Un espacio para crear a tu manera.</p>
+          <div class="actions">
+            <button class="btn" type="button" onclick="comprar('iPad Air')">Comprar</button>
+            <a class="btn secondary" href="https://www.apple.com/mx/ipad-air/">Más información</a>
+            <a class="btn secondary" href="https://www.apple.com/mx/shop/goto/buy_ipad/ipad_air" target="_blank" rel="noopener">Ver en Apple</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- MacBook Pro -->
+      <section class="tile dark" id="macbook-pro">
+        <picture class="product">
+          <source media="(max-width:734px)" srcset="https://www.apple.com/v/homepage/images/macbook-pro/a/hero_macbook_pro__b9g09qsga0vm_small.jpg, https://www.apple.com/v/homepage/images/macbook-pro/a/hero_macbook_pro__b9g09qsga0vm_small_2x.jpg 2x">
+          <source media="(max-width:1068px)" srcset="https://www.apple.com/v/homepage/images/macbook-pro/a/hero_macbook_pro__b9g09qsga0vm_medium.jpg, https://www.apple.com/v/homepage/images/macbook-pro/a/hero_macbook_pro__b9g09qsga0vm_medium_2x.jpg 2x">
+          <source media="(min-width:0px)" srcset="https://www.apple.com/v/homepage/images/macbook-pro/a/hero_macbook_pro__b9g09qsga0vm_large.jpg, https://www.apple.com/v/homepage/images/macbook-pro/a/hero_macbook_pro__b9g09qsga0vm_large_2x.jpg 2x">
+          <img src="https://www.apple.com/v/homepage/images/macbook-pro/a/hero_macbook_pro__b9g09qsga0vm_large.jpg" alt="MacBook Pro" loading="lazy">
+        </picture>
+        <div class="copy">
+          <h2>MacBook Pro</h2>
+          <p>Lleva tus proyectos más lejos.</p>
+          <div class="actions">
+            <button class="btn" type="button" onclick="comprar('MacBook Pro')">Comprar</button>
+            <a class="btn secondary" href="https://www.apple.com/mx/macbook-pro/">Más información</a>
+            <a class="btn secondary" href="https://www.apple.com/mx/shop/goto/buy_mac/macbook_pro" target="_blank" rel="noopener">Ver en Apple</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Apple Trade In -->
+      <section class="tile" id="iphone-tradein">
+        <picture class="product">
+          <source media="(max-width:734px)" srcset="https://www.apple.com/v/homepage/images/iphone-tradein/a/promo_iphone_tradein__e4hrjxmgmf0i_small.jpg, https://www.apple.com/v/homepage/images/iphone-tradein/a/promo_iphone_tradein__e4hrjxmgmf0i_small_2x.jpg 2x">
+          <source media="(max-width:1068px)" srcset="https://www.apple.com/v/homepage/images/iphone-tradein/a/promo_iphone_tradein__e4hrjxmgmf0i_medium.jpg, https://www.apple.com/v/homepage/images/iphone-tradein/a/promo_iphone_tradein__e4hrjxmgmf0i_medium_2x.jpg 2x">
+          <source media="(min-width:0px)" srcset="https://www.apple.com/v/homepage/images/iphone-tradein/a/promo_iphone_tradein__e4hrjxmgmf0i_large.jpg, https://www.apple.com/v/homepage/images/iphone-tradein/a/promo_iphone_tradein__e4hrjxmgmf0i_large_2x.jpg 2x">
+          <img src="https://www.apple.com/v/homepage/images/iphone-tradein/a/promo_iphone_tradein__e4hrjxmgmf0i_large.jpg" alt="Apple Trade In" loading="lazy">
+        </picture>
+        <div class="copy">
+          <h2>
+            <picture class="logo">
+              <source media="(max-width:734px)" srcset="https://www.apple.com/v/homepage/images/logos/iphone-tradein/a/promo_logo_iphone_tradein__bb7assu7ubo2_small.png, https://www.apple.com/v/homepage/images/logos/iphone-tradein/a/promo_logo_iphone_tradein__bb7assu7ubo2_small_2x.png 2x">
+              <source media="(max-width:1068px)" srcset="https://www.apple.com/v/homepage/images/logos/iphone-tradein/a/promo_logo_iphone_tradein__bb7assu7ubo2_medium.png, https://www.apple.com/v/homepage/images/logos/iphone-tradein/a/promo_logo_iphone_tradein__bb7assu7ubo2_medium_2x.png 2x">
+              <source media="(min-width:0px)" srcset="https://www.apple.com/v/homepage/images/logos/iphone-tradein/a/promo_logo_iphone_tradein__bb7assu7ubo2_large.png, https://www.apple.com/v/homepage/images/logos/iphone-tradein/a/promo_logo_iphone_tradein__bb7assu7ubo2_large_2x.png 2x">
+              <img src="https://www.apple.com/v/homepage/images/logos/iphone-tradein/a/promo_logo_iphone_tradein__bb7assu7ubo2_large.png" alt="Apple Trade In" loading="lazy">
+            </picture>
+          </h2>
+          <p>Dale un nuevo comienzo a tu próximo iPhone.</p>
+          <div class="actions">
+            <a class="btn" href="https://www.apple.com/mx/shop/goto/trade_in" target="_blank" rel="noopener">Más información</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Interactive Order Form Section -->
+  <section class="order-section" id="pedido">
+    <div class="order-container">
+      <h2>Completa tu pedido.</h2>
+      <p class="order-intro">
+        Ingresa tus datos para preparar tu pedido y proceder con el pago de tu nuevo dispositivo.
+      </p>
+
+      <form id="orderForm" onsubmit="procesarPedido(event)">
+        <div class="form-grid">
+          <label class="full">
+            <span>Producto seleccionado</span>
+            <select id="productoSelect" name="producto" required onchange="actualizarPrecio()">
+              <option value="" disabled selected>-- Selecciona un producto --</option>
+              <option value="iPhone Duo" data-price="24999">iPhone Duo ($24,999 MXN)</option>
+              <option value="iPhone 18 Pro" data-price="29999">iPhone 18 Pro ($29,999 MXN)</option>
+              <option value="Apple Watch Series 12" data-price="9999">Apple Watch Series 12 ($9,999 MXN)</option>
+              <option value="Apple TV 4K" data-price="3499">Apple TV 4K ($3,499 MXN)</option>
+              <option value="HomePod mini 2" data-price="2299">HomePod mini 2 ($2,299 MXN)</option>
+              <option value="Apple Watch Ultra 4" data-price="17999">Apple Watch Ultra 4 ($17,999 MXN)</option>
+              <option value="iPad Air" data-price="14999">iPad Air ($14,999 MXN)</option>
+              <option value="MacBook Pro" data-price="34999">MacBook Pro ($34,999 MXN)</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Nombre completo</span>
+            <input type="text" name="nombre" placeholder="ej. María González" required>
+          </label>
+
+          <label>
+            <span>Correo electrónico</span>
+            <input type="email" name="email" placeholder="ej. usuario@ejemplo.com" required>
+          </label>
+
+          <label class="full">
+            <span>Dirección de envío</span>
+            <input type="text" name="direccion" placeholder="Calle, número, colonia, código postal" required>
+          </label>
+
+          <label>
+            <span>Método de Pago</span>
+            <select name="pago" required>
+              <option value="Tarjeta de Crédito / Débito">Tarjeta de Crédito / Débito</option>
+              <option value="Apple Pay">Apple Pay</option>
+              <option value="Transferencia Bancaria">Transferencia Bancaria</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Teléfono de contacto</span>
+            <input type="tel" name="telefono" placeholder="55 1234 5678" required>
+          </label>
+        </div>
+
+        <p class="payment-note">
+          Envío estándar gratuito en todos los pedidos.
+        </p>
+
+        <label class="consent">
+          <input type="checkbox" required>
+          <span>Acepto los términos y condiciones de compra y la política de privacidad.</span>
+        </label>
+
+        <button type="submit" class="order-submit" id="btnSubmit">Confirmar y Comprar</button>
+      </form>
+
+      <!-- Receipt / Order Result Container -->
+      <div class="order-result" id="orderResult">
+        <h3>¡Gracias por tu compra!</h3>
+        <p>Tu pedido ha sido procesado con éxito. Hemos enviado un correo de confirmación con la guía de rastreo.</p>
+        <div class="order-summary-box" id="orderSummary">
+          <!-- Dynamic details filled via JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <div>
+      <p>1. Ofertas sujetas a disponibilidad y elegibilidad. Los precios y promociones están sujetos a cambios sin previo aviso.</p>
+      <p>Recreación visual desarrollada con fines de demostración de interfaz e interacción web.</p>
+      <div class="footlinks">
+        <a href="#">Privacidad</a>
+        <a href="#">Aviso legal</a>
+        <a href="#">Ventas y reembolsos</a>
+        <a href="#">Mapa del sitio</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript Interaction Logic -->
+  <script>
+    // Navigation Mobile Menu Toggle
+    const menuBtn = document.getElementById('menu');
+    const navLinks = document.getElementById('navlinks');
+
+    if (menuBtn && navLinks) {
+      menuBtn.addEventListener('click', () => {
+        const isOpen = navLinks.classList.toggle('open');
+        menuBtn.setAttribute('aria-expanded', isOpen);
+      });
+    }
+
+    /**
+     * Handles clicking 'Comprar' buttons across the site.
+     * Selects product and smoothly scrolls to checkout section.
+     * @param {string} nombreProducto
+     */
+    function comprar(nombreProducto) {
+      const select = document.getElementById('productoSelect');
+      const orderSection = document.getElementById('pedido');
+
+      if (select) {
+        // Find matching option
+        for (let i = 0; i < select.options.length; i++) {
+          if (select.options[i].value === nombreProducto) {
+            select.selectedIndex = i;
+            break;
+          }
+        }
+      }
+
+      // Hide previous result if visible
+      const resultBox = document.getElementById('orderResult');
+      if (resultBox) resultBox.style.display = 'none';
+
+      // Smooth scroll to checkout form
+      if (orderSection) {
+        orderSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    /**
+     * Form submission process simulation
+     * @param {Event} e
+     */
+    function procesarPedido(e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const formData = new FormData(form);
+      const producto = formData.get('producto');
+      const nombre = formData.get('nombre');
+      const email = formData.get('email');
+      const direccion = formData.get('direccion');
+      const pago = formData.get('pago');
+
+      const select = document.getElementById('productoSelect');
+      const selectedOption = select.options[select.selectedIndex];
+      const price = selectedOption ? selectedOption.getAttribute('data-price') : '0';
+      const formattedPrice = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(price);
+
+      // Render order details
+      const summaryBox = document.getElementById('orderSummary');
+      summaryBox.innerHTML = `
+        <p><strong>Número de Pedido:</strong> #APL-${Math.floor(100000 + Math.random() * 900000)}</p>
+        <p><strong>Producto:</strong> ${producto}</p>
+        <p><strong>Total:</strong> ${formattedPrice}</p>
+        <p><strong>Cliente:</strong> ${nombre}</p>
+        <p><strong>Correo:</strong> ${email}</p>
+        <p><strong>Dirección de entrega:</strong> ${direccion}</p>
+        <p><strong>Método de pago:</strong> ${pago}</p>
+      `;
+
+      // Display result box
+      const resultBox = document.getElementById('orderResult');
+      resultBox.style.display = 'block';
+
+      // Reset form
+      form.reset();
+
+      // Scroll to confirmation box
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
